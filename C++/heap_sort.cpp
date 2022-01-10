@@ -22,14 +22,14 @@ void PrintVector(const std::vector<T>& array) {
     3) comp - function for elements comparison, optional for common data types
 */
 
-template <typename RandomAccessIterator, 
-    typename Compare=std::less<typename std::iterator_traits<RandomAccessIterator>::value_type>>
-void Heapify(RandomAccessIterator first, RandomAccessIterator last, 
-        RandomAccessIterator node, Compare comp=Compare()) {
+template <typename RandomAccessIter, 
+    typename Compare=std::less<typename std::iterator_traits<RandomAccessIter>::value_type>>
+void Heapify(RandomAccessIter first, RandomAccessIter last, 
+        RandomAccessIter node, Compare comp=Compare()) {
     if (2 * std::distance(first, node) + 2 <= std::distance(first, last)) {
-        RandomAccessIterator largest = node;
-        RandomAccessIterator left = first + 2 * std::distance(first, node) + 1;
-        RandomAccessIterator right = first + 2 * std::distance(first, node) + 2;
+        RandomAccessIter largest = node;
+        RandomAccessIter left = first + 2 * std::distance(first, node) + 1;
+        RandomAccessIter right = first + 2 * std::distance(first, node) + 2;
         
         if (left < last && !(comp(*left, *largest))) {
             largest = left;
@@ -47,27 +47,27 @@ void Heapify(RandomAccessIterator first, RandomAccessIterator last,
 
 // works in O(NlogN),
 // TODO: make for O(N) 
-template<typename RandomAccessIterator, 
-    typename Compare=std::less<typename std::iterator_traits<RandomAccessIterator>::value_type>>
-void MakeHeap(RandomAccessIterator first, RandomAccessIterator last, Compare comp=Compare()) {
+template<typename RandomAccessIter, 
+    typename Compare=std::less<typename std::iterator_traits<RandomAccessIter>::value_type>>
+void MakeHeap(RandomAccessIter first, RandomAccessIter last, Compare comp=Compare()) {
     if (last - first < 2) {
         return;
     }
-    for (RandomAccessIterator iter = first + ((last - first) / 2) - 1; (iter + 1) != first; --iter) {
+    for (RandomAccessIter iter = first + ((last - first) / 2) - 1; (iter + 1) != first; --iter) {
         Heapify(first, last, iter, comp);
     }
 }
 
 // Complexity: TL - O(NlogN), ML - O(1)
 // Features: inplace sort, unstable
-template <typename RandomAccessIterator, 
-    typename Compare=std::less<typename std::iterator_traits<RandomAccessIterator>::value_type>>
-void HeapSort(RandomAccessIterator first, RandomAccessIterator last, Compare comp=Compare()) {
+template <typename RandomAccessIter, 
+    typename Compare=std::less<typename std::iterator_traits<RandomAccessIter>::value_type>>
+void HeapSort(RandomAccessIter first, RandomAccessIter last, Compare comp=Compare()) {
     if (last - first < 2) {
         return;
     }
     MakeHeap(first, last, comp);
-    for (RandomAccessIterator iter = last - 1; iter != first; --iter) {
+    for (RandomAccessIter iter = last - 1; iter != first; --iter) {
         std::swap(*first, *iter);
         --last;
         Heapify(first, last, first, comp);
