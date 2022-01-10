@@ -10,6 +10,18 @@ void PrintVector(const std::vector<T>& array) {
     std::cout << "\n";
 }
 
+// Template heapsort
+
+/* Arguments:
+    1) first - iterator refering to the first element of a container, from which to 
+    perform sorting
+
+    2) last - iterator pointing to a memory segment directly after the last container
+    element up to which to perform sorting
+    
+    3) comp - function for elements comparison, optional for common data types
+*/
+
 template <typename Iterator, typename Compare=std::less<typename std::iterator_traits<Iterator>::value_type>>
 void Heapify (Iterator first, Iterator last, Iterator node, Compare comp=Compare()) {
     if (2 * std::distance(first, node) + 2 <= std::distance(first, last)) {
@@ -31,7 +43,7 @@ void Heapify (Iterator first, Iterator last, Iterator node, Compare comp=Compare
     return;
 }
 
-// works for O(NlogN),
+// works in O(NlogN),
 // TODO: make for O(N) 
 template<typename Iterator, typename Compare=std::less<typename std::iterator_traits<Iterator>::value_type>>
 void MakeHeap(Iterator first, Iterator last, Compare comp=Compare()) {
