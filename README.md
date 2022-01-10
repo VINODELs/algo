@@ -1,3 +1,3 @@
 # algo
 Some classical algorithms on C++ and Python
-$\mathbb{E}$
+$\frac{2}{4}$
