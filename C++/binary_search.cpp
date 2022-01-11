@@ -3,7 +3,7 @@
 
 bool bin_search(const std::vector<int>& arr, int target) {
     int left = 0;
-    int right = static_cast<int>(arr.size());
+    int right = arr.size();
     
     while (right - left > 0) {
         int mid = (left + right) / 2;
